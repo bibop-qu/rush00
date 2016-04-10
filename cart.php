@@ -18,17 +18,22 @@
 	if (mysqli_connect_errno())
 		die("Connection failed: " . mysqli_connect_error());
 		$login = $_SESSION['login'];
+		if ($login == NULL)
+			return ;
 		$panier = array();
 		$tmp = $_POST['Add'];
 		if ($_POST['Add'] != NULL)
 			$panier[] = $tmp;
 		if ($panier != NULL)
 			$_SESSION['panier'][] = $panier;
+		if ($_SESSION['panier'] == NULL)
+			return ;
 		foreach ($_SESSION['panier'] as $value)
 		{
 			echo $value[0].'<BR \>';
 		}
-		echo ('<form method="POST" action="envoie.php"<input type"text" name="validate"></form>');
+		if ($_POST['login'])
+			echo ('<form method="POST" action="envoie.php"<input type"text" name="validate"></form>');
 		mysqli_close($conn);
 		?>
 		<DIV>
